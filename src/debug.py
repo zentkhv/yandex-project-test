@@ -11,4 +11,3 @@ if __name__ == "__main__":
     print(json_dict)
 
     sys.exit(0)
-
