@@ -1,0 +1,7 @@
+repos:
+  - repo: https://github.com/pycqa/flake8
+    # rev: '6.1.0'  # используйте актуальную версию
+    hooks:
+      - id: flake8
+        # Опционально: добавить аргументы командной строки
+        # args: [--max-line-length=119]
