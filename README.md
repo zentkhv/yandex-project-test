@@ -1,2 +1,1 @@
 # yandex-project-test
-

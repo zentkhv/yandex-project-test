@@ -1,7 +1,28 @@
 repos:
+  # Flake8 проверка стиля кода
   - repo: https://github.com/pycqa/flake8
-    # rev: '6.1.0'  # используйте актуальную версию
+    rev: '6.1.0'  # используйте актуальную версию
     hooks:
       - id: flake8
-        # Опционально: добавить аргументы командной строки
-        # args: [--max-line-length=119]
+        args: [--max-line-length=119]
+        exclude: ^migrations/|^venv/|^\.venv/
+
+  # Pylint (более строгая проверка)
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args: [--fail-under=8.0]
+        exclude: ^tests/|^migrations/
+
+  # Удаление лишних пробелов
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
