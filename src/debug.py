@@ -3,7 +3,7 @@ import json
 import sys
 
 if __name__ == "__main__":
-    test_dict = {1:1, 2:2, 3:3}
+    test_dict = {1: 1, 2: 2, 3: 3}
 
     for key, value in test_dict.items():
 
