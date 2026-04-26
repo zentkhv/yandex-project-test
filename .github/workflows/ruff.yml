@@ -16,8 +16,24 @@ jobs:
       - name: Install Ruff
         run: pip install ruff
 
-      - name: Run Ruff (linting)
-        run: ruff check .
+      - name: Run Ruff (linting) with annotations
+        run: ruff check --output-format=github .
 
-      - name: Run Ruff (formatting check)
-        run: ruff format --check .
+      - name: Check formatting with diff
+        id: format_check
+        run: |
+          if ! ruff format --check --diff . > format_diff.txt 2>&1; then
+            echo "FORMAT_ERROR=true" >> $GITHUB_ENV
+            cat format_diff.txt
+            exit 1
+          fi
+
+      - name: Show formatting suggestions
+        if: env.FORMAT_ERROR == 'true'
+        run: |
+          echo "❌ Неправильное форматирование! Запустите локально:"
+          echo "ruff format ."
+          echo ""
+          echo "Или примените эти изменения:"
+          echo "---"
+          cat format_diff.txt
