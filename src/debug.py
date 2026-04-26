@@ -21,5 +21,3 @@ if __name__ == "__main__":
     data = [{"Имя": "Михаил", "Возраст": 18}, {"Имя": "Александр", "Возраст": 20}]
     frame = model.frame(columns=columns, data=data)
     print(frame)
-
-
