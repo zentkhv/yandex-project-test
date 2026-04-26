@@ -1,8 +1,8 @@
 """Модуль для отладки."""
 
 # Глобальные пакеты
-import json
-import sys
+# import json
+# import sys
 
 # Локальные пакеты
 from src import model
