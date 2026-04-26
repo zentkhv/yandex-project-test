@@ -21,6 +21,7 @@ jobs:
 
       - name: Check formatting with diff
         id: format_check
+        continue-on-error: true  # 👈 НЕ завершать workflow при ошибке
         run: |
           if ! ruff format --check --diff . > format_diff.txt 2>&1; then
             echo "FORMAT_ERROR=true" >> $GITHUB_ENV
@@ -29,7 +30,7 @@ jobs:
           fi
 
       - name: Show formatting suggestions
-        if: env.FORMAT_ERROR == 'true'
+        if: env.FORMAT_ERROR == 'true'  # 👈 Теперь условие сработает
         run: |
           echo "❌ Неправильное форматирование! Запустите локально:"
           echo "ruff format ."
@@ -37,3 +38,7 @@ jobs:
           echo "Или примените эти изменения:"
           echo "---"
           cat format_diff.txt
+
+      - name: Fail the workflow if formatting was bad
+        if: env.FORMAT_ERROR == 'true'
+        run: exit 1
